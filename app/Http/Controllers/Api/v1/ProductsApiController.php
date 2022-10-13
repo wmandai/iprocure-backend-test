@@ -83,7 +83,7 @@ class ProductsApiController extends Controller
                 return $this->success([
                     'message' => 'Product ' . $request->name . ' created successfully',
                     'id' => $product->id
-                ]);
+                ], 201);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
                 return $this->failed(['error' => 'Failed, contact sys admin']);

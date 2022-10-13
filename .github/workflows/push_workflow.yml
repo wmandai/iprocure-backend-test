@@ -64,6 +64,7 @@ jobs:
           DB_PASSWORD: secret
         run: |
           php artisan migrate:fresh --seed -vv
+          php artisan jwt:secret
           vendor/bin/pest
   code-style:
     needs: build

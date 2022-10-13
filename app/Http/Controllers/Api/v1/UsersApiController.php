@@ -53,7 +53,7 @@ class UsersApiController extends Controller
                 return $this->success([
                     'message' => 'User ' . $request->firstName . ' created successfully',
                     'id' => $user->id
-                ]);
+                ], 201);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
                 return $this->failed(['error' => 'Failed to create system user. Contact sys admin']);

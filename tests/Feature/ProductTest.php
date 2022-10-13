@@ -52,7 +52,7 @@ class ProductTest extends TestCase
         ];
 
         $response = $this->postJson('/api/v1/products/new', $payload);
-        $response->assertStatus(200)->assertJson([
+        $response->assertStatus(201)->assertJson([
             'id' => true,
         ]);
         $product = $response->getData()->id;

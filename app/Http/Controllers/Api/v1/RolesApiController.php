@@ -53,7 +53,7 @@ class RolesApiController extends Controller
                 return $this->success([
                     'message' => 'Role ' . $request->name . ' created successfully',
                     'id' => $role->id
-                ]);
+                ], 201);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
                 return $this->failed(['error' => 'Failed, contact sys admin']);

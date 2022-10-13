@@ -45,7 +45,7 @@ class UserTest extends TestCase
         ];
         $this->createUserWithToken();
         $response = $this->postJson('/api/v1/users/new', $payload);
-        $response->assertStatus(200)->assertJson([
+        $response->assertStatus(201)->assertJson([
             'id' => true,
         ]);
         $user     = $response->getData()->id;

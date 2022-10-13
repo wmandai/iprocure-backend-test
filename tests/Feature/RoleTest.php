@@ -43,7 +43,7 @@ class RoleTest extends TestCase
             'guard_name' => 'web'
         ];
         $response = $this->postJson('/api/v1/roles/new', $payload);
-        $response->assertStatus(200)->assertJson([
+        $response->assertStatus(201)->assertJson([
             'id' => true,
         ]);
         $role = $response->getData()->id;
