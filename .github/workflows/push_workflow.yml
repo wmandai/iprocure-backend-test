@@ -43,8 +43,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-        env:
-          COMPOSER_TOKEN: ${{ secrets.COMPOSER_GH_TOKEN }}
       - name: Setup .env file
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies
