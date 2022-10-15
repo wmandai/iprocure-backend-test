@@ -56,7 +56,7 @@ class AuthApiController extends Controller
                 'token' => $token,
                 'type' => 'bearer',
             ]
-        ]);
+        ], 201);
     }
 
     public function logout()

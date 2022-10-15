@@ -77,6 +77,7 @@ class ProductsApiController extends Controller
     public function create(ProductAdderRequest $request)
     {
         if ($request->user()->can('create', Product::class)) {
+            // Some protective checking before saving
             $validatedData = $request->validated();
             try {
                 $product = (new ProductAction())->save($validatedData);

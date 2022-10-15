@@ -37,10 +37,9 @@ class ProductPolicy
      * Determine whether the user can search products
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function search(User $user, Product $product)
+    public function search(User $user)
     {
         return $user->hasRole('Admin') || $user->hasPermissionTo('products_search');
     }

@@ -47,6 +47,7 @@ class RolesApiController extends Controller
     public function create(RoleAdderRequest $request)
     {
         if ($request->user()->can('create', Role::class)) {
+            // Some protective checking before saving
             $validatedData = $request->validated();
             try {
                 $role = (new RoleAction())->save($validatedData);

@@ -47,6 +47,7 @@ class UsersApiController extends Controller
     public function create(UserAdderRequest $request)
     {
         if ($request->user()->can('create', User::class)) {
+            // Some protective checking before saving
             $validatedData = $request->validated();
             try {
                 $user = (new UserAction())->save($validatedData);
