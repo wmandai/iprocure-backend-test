@@ -66,7 +66,7 @@ class ProductsApiController extends Controller
         $request->validate(['search' => 'required']);
         if ($request->user()->can('search', Product::class)) {
             return new ProductCollection(
-                Product::whereLike(['name', 'type', 'category', 'manufacturer', 'distributor'], $request->search)
+                Product::whereLike(['name', 'unit_cost', 'type', 'category', 'manufacturer', 'distributor'], $request->search)
                     ->orderByDesc('id')
                     ->paginate(25)
             );

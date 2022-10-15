@@ -11,10 +11,10 @@ trait InteractsWithREST
     protected $scopes = [];
     protected $user;
 
-    public function createUserWithToken()
+    public function createUserWithToken($role = 'Admin')
     {
         $this->user = User::factory()->create();
-        $this->user->syncRoles('Admin');
+        $this->user->syncRoles($role);
         $token = Auth::login($this->user);
         $this->headers['Accept'] = 'application/json';
         $this->headers['Authorization'] = 'Bearer ' . $token;

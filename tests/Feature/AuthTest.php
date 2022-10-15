@@ -40,4 +40,25 @@ class AuthTest extends TestCase
         ]);
         $this->postJson('/api/v1/auth/login', ['email' => $payload['email'], 'password' => $payload['password']])->assertStatus(200);
     }
+
+    public function test_customer_cannot_create_roles()
+    {
+        $this->createUserWithToken('Customer');
+        $this->postJson('/api/v1/roles/new', ['name' => 'Editor', 'guard_name' => 'web'])->assertStatus(401);
+    }
+    public function test_customer_cannot_create_users()
+    {
+        $this->createUserWithToken('Customer');
+        $this->postJson('/api/v1/users/new', [
+            'firstName' => 'Jane',
+            'lastName' => 'Doe',
+            'email' => 'janedoe@example.com',
+            'password' => 'jane@@'
+        ])->assertStatus(401);
+    }
+    public function test_customer_can_search_products()
+    {
+        $this->createUserWithToken('Customer');
+        $this->postJson('/api/v1/products/search', ['search' => 'almatix'])->assertStatus(200);
+    }
 }
