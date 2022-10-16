@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasRole('Admin') || ($user->hasPermissionTo('users_access'));
     }
 
     /**
@@ -29,7 +29,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return $user->hasRole('Admin') || ($user->hasPermissionTo('user_access'));
+        return $user->hasRole('Admin') || ($user->hasPermissionTo('users_access'));
     }
 
     /**

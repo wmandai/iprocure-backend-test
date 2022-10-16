@@ -28,8 +28,8 @@ class ProductUpdaterRequest extends FormRequest
             'description' => 'required',
             'type' => 'required',
             'category' => 'required',
-            'quantity' => 'required|integer',
-            'unit_cost' => 'required|numeric',
+            'quantity' => 'required|integer|gt:0',
+            'unit_cost' => 'required|numeric|gt:0',
             'manufacturer' => 'required',
             'distributor' => 'required',
         ];

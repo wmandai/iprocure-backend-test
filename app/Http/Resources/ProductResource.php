@@ -29,7 +29,7 @@ class ProductResource extends JsonResource
                 'distributor' => $this->distributor,
                 'user' => [
                     'id' => $this->user_id,
-                    'name' => $this->user->name,
+                    'name' => $this->user->firstName . ' ' . $this->user->lastName,
                     'email' => $this->user->email,
                 ],
                 'created_at' => $this->created_at->toIso8601String(),

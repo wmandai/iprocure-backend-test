@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Actions\Users\UserAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserAdderRequest;
 use App\Models\User;
+use App\Traits\InteractsWithAPI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthApiController extends Controller
 {
+    use InteractsWithAPI;
+
     public $request;
 
     public function __construct(Request $request)
@@ -25,55 +30,47 @@ class AuthApiController extends Controller
             'password' => 'required|string',
         ]);
         $credentials = $this->request->only('email', 'password');
-
         $credentials = request(['email', 'password']);
-
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['status' => 'error', 'message' => 'Failed to authenticate, please check your credentials'], 401);
+        if (!$token = auth()->attempt($credentials)) {
+            return $this->failed(['error' => 'Failed to authenticate, check credentials']);
         }
 
         return $this->respondWithToken($token);
     }
 
-    public function register()
+    public function register(UserAdderRequest $request)
     {
-        $validatedData = $this->request->validate([
-            'firstName' => 'required|string|max:255',
-            'lastName' => 'required|string|max:255',
-            'phoneNumber' => 'sometimes',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+        $validatedData = $request->validated();
         $validatedData['password'] = Hash::make($this->request->password);
-        $user = User::create($validatedData);
-
-        $token = Auth::login($user);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
-            'user' => $user,
-            'authorization' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ],
-        ], 201);
+        try {
+            $user = (new UserAction())->save($validatedData);
+            $token = Auth::login($user);
+            return $this->success([
+                'message' => 'User created successfully',
+                'authorization' => [
+                    'token' => $token,
+                    'type' => 'bearer',
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return $this->failed(['error' => 'Failed to register user']);
+        }
     }
 
     public function logout()
     {
-        Auth::logout();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully logged out',
-        ]);
+        try {
+            Auth::logout();
+            return $this->success([
+                'message' => 'Successfully logged out'
+            ]);
+        } catch (\Exception $e) {
+            return $this->failed(['error' => 'Failed to logout']);
+        }
     }
-
     public function refresh()
     {
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'user' => Auth::user(),
             'authorization' => [
                 'token' => Auth::refresh(),
@@ -81,7 +78,6 @@ class AuthApiController extends Controller
             ],
         ]);
     }
-
     /**
      * Get the token array structure.
      *
@@ -90,10 +86,9 @@ class AuthApiController extends Controller
      */
     protected function respondWithToken($token)
     {
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'user' => auth()->user(),
-            'authorisation' => [
+            'authorization' => [
                 'token' => $token,
                 'type' => 'bearer',
                 'expires_in' => auth()->factory()->getTTL() * 60,

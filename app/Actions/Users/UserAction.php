@@ -11,7 +11,9 @@ class UserAction
     {
         return DB::transaction(
             function () use ($validatedData) {
-                return User::create($validatedData);
+                $user = User::create($validatedData);
+                $user->syncRoles(config('system.default_role'));
+                return $user;
             }
         );
     }
@@ -30,6 +32,7 @@ class UserAction
         return DB::transaction(
             function () use ($user): void {
                 $user->delete();
+                $user->products()->delete();
             }
         );
     }
