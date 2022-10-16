@@ -46,6 +46,7 @@ class AuthTest extends TestCase
         $this->createUserWithToken('Customer');
         $this->postJson('/api/v1/roles/new', ['name' => 'Editor', 'guard_name' => 'web'])->assertStatus(401);
     }
+
     public function test_customer_cannot_create_users()
     {
         $this->createUserWithToken('Customer');
@@ -53,9 +54,10 @@ class AuthTest extends TestCase
             'firstName' => 'Jane',
             'lastName' => 'Doe',
             'email' => 'janedoe@example.com',
-            'password' => 'jane@@'
+            'password' => 'jane@@',
         ])->assertStatus(401);
     }
+
     public function test_customer_can_search_products()
     {
         $this->createUserWithToken('Customer');

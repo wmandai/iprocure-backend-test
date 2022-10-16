@@ -28,6 +28,7 @@ class UserTest extends TestCase
     {
         $this->deleteJson('/api/v1/users/delete/123')->assertStatus(401);
     }
+
     public function test_can_create_update_delete_users()
     {
         $payload = [
@@ -44,12 +45,12 @@ class UserTest extends TestCase
         ]);
         $userId = $response->getData()->id;
         // test user can be seen
-        $response = $this->getJson('/api/v1/users/view/' . $userId);
+        $response = $this->getJson('/api/v1/users/view/'.$userId);
         $response->assertStatus(200)->assertJson([
             'data' => true,
         ]);
         // test user can be updated
-        $response = $this->putJson('/api/v1/users/update/' . $userId, Arr::prepend($payload, now()->toDateTimeString(), 'email_verified_at'));
+        $response = $this->putJson('/api/v1/users/update/'.$userId, Arr::prepend($payload, now()->toDateTimeString(), 'email_verified_at'));
         $response->assertStatus(200)->assertJson([
             'id' => true,
         ]);
@@ -59,7 +60,7 @@ class UserTest extends TestCase
             'data' => true,
         ]);
         // test user can be deleted
-        $response = $this->deleteJson('/api/v1/users/delete/' . $userId);
+        $response = $this->deleteJson('/api/v1/users/delete/'.$userId);
         $response->assertStatus(200)->assertJson([
             'message' => true,
         ]);

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -26,8 +25,7 @@ class ProductFactory extends Factory
             'unit_cost' => rand(100, 1000),
             'manufacturer' => 'Norbrook',
             'distributor' => 'Solai Agrovet',
-            'user_id' => auth()->id()
-
+            'user_id' => auth()->id(),
         ];
     }
 }

@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\Role;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
-use Tests\InteractsWithREST;
 use Arr;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\InteractsWithREST;
+use Tests\TestCase;
 
 class RoleTest extends TestCase
 {
@@ -33,7 +33,7 @@ class RoleTest extends TestCase
         $this->createUserWithToken();
         $payload = [
             'name' => 'Editor',
-            'guard_name' => 'web'
+            'guard_name' => 'web',
         ];
         // test creating new role
         $response = $this->postJson('/api/v1/roles/new', $payload);
@@ -42,12 +42,12 @@ class RoleTest extends TestCase
         ]);
         $roleId = $response->getData()->id;
         // test role can be seen
-        $response = $this->getJson('/api/v1/roles/view/' . $roleId);
+        $response = $this->getJson('/api/v1/roles/view/'.$roleId);
         $response->assertStatus(200)->assertJson([
             'data' => true,
         ]);
         // test role can be updated
-        $response = $this->putJson('/api/v1/roles/update/' . $roleId, Arr::prepend($payload, 'api', 'guard_name'));
+        $response = $this->putJson('/api/v1/roles/update/'.$roleId, Arr::prepend($payload, 'api', 'guard_name'));
         $response->assertStatus(200)->assertJson([
             'id' => true,
         ]);
@@ -57,7 +57,7 @@ class RoleTest extends TestCase
             'data' => true,
         ]);
         // test deleting roles
-        $response = $this->deleteJson('/api/v1/roles/delete/' . $roleId);
+        $response = $this->deleteJson('/api/v1/roles/delete/'.$roleId);
         $response->assertStatus(200)->assertJson([
             'message' => true,
         ]);

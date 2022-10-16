@@ -41,6 +41,7 @@ class RolesApiController extends Controller
         if (auth()->user()->can('view', $role)) {
             return new RoleResource($role);
         }
+
         return $this->unauthorized();
     }
 
@@ -51,15 +52,18 @@ class RolesApiController extends Controller
             $validatedData = $request->validated();
             try {
                 $role = (new RoleAction())->save($validatedData);
+
                 return $this->success([
-                    'message' => 'Role ' . $request->name . ' created successfully',
-                    'id' => $role->id
+                    'message' => 'Role '.$request->name.' created successfully',
+                    'id' => $role->id,
                 ], 201);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+
                 return $this->failed(['error' => 'Failed, contact sys admin']);
             }
         }
+
         return $this->unauthorized();
     }
 
@@ -76,15 +80,18 @@ class RolesApiController extends Controller
         if ($request->user()->can('update', $role)) {
             try {
                 (new RoleAction())->update($role, $request->validated());
+
                 return $this->success([
-                    'message' => 'Role ' . $role->name . ' updated successfully',
-                    'id' => $role->id
+                    'message' => 'Role '.$role->name.' updated successfully',
+                    'id' => $role->id,
                 ]);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+
                 return $this->failed(['error' => 'Failed to update role']);
             }
         }
+
         return $this->unauthorized();
     }
 
@@ -100,12 +107,15 @@ class RolesApiController extends Controller
         if ($request->user()->can('delete', $role)) {
             try {
                 (new RoleAction())->delete($role);
-                return $this->success(['message' => 'Role ' . $role->name . ' deleted successfully']);
+
+                return $this->success(['message' => 'Role '.$role->name.' deleted successfully']);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+
                 return $this->failed(['error' => 'Could not delete role.']);
             }
         }
+
         return $this->unauthorized();
     }
 }

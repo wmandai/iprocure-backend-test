@@ -2,7 +2,6 @@
 
 namespace App\Actions\Users;
 
-use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -16,6 +15,7 @@ class UserAction
             }
         );
     }
+
     public function update(User $user, array $validatedData)
     {
         return DB::transaction(

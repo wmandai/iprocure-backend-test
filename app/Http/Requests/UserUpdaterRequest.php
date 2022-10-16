@@ -24,11 +24,12 @@ class UserUpdaterRequest extends FormRequest
     public function rules($userId = null)
     {
         $userId = is_null($userId) ? $this->route('id') : $userId;
+
         return [
             'firstName' => 'required|string',
             'lastName' => 'required|string',
             'phoneNumber' => 'nullable',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $userId,
+            'email' => 'required|string|email|max:255|unique:users,email,'.$userId,
             'password' => 'required|string|min:6',
         ];
     }

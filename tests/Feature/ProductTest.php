@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
 use Arr;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\InteractsWithREST;
+use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
@@ -40,7 +40,7 @@ class ProductTest extends TestCase
             'unit_cost' => 350,
             'manufacturer' => 'Norbrook',
             'distributor' => 'Solai Agrovet',
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
         ];
         // create a new product
         $response = $this->postJson('/api/v1/products/new', $payload);
@@ -49,12 +49,12 @@ class ProductTest extends TestCase
         ]);
         $productId = $response->getData()->id;
         // test product can be seen
-        $response = $this->getJson('/api/v1/products/view/' . $productId);
+        $response = $this->getJson('/api/v1/products/view/'.$productId);
         $response->assertStatus(200)->assertJson([
             'data' => true,
         ]);
         // test updating product
-        $response = $this->putJson('/api/v1/products/update/' . $productId, Arr::prepend($payload, 380, 'unit_cost'));
+        $response = $this->putJson('/api/v1/products/update/'.$productId, Arr::prepend($payload, 380, 'unit_cost'));
         $response->assertStatus(200)->assertJson([
             'id' => true,
         ]);
@@ -69,7 +69,7 @@ class ProductTest extends TestCase
             'data' => true,
         ]);
         // test that application can delete product
-        $response = $this->deleteJson('/api/v1/products/delete/' . $productId);
+        $response = $this->deleteJson('/api/v1/products/delete/'.$productId);
         $response->assertStatus(200)->assertJson([
             'message' => true,
         ]);

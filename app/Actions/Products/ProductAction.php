@@ -12,10 +12,12 @@ class ProductAction
         return DB::transaction(
             function () use ($validatedData) {
                 $validatedData['user_id'] = auth()->id();
+
                 return Product::create($validatedData);
             }
         );
     }
+
     public function update(Product $product, array $validatedData)
     {
         return DB::transaction(

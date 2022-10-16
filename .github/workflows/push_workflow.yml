@@ -10,16 +10,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Service container Mysql
     services:
-      # Label used to access the service container
       mysql:
-        # Docker Hub image (also with version)
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DATABASE: iproc
-        ## map the "external" 33306 port with the "internal" 3306
         ports:
           - 3306:3306
         # Set health checks to wait until mysql database has started (it takes some seconds to start)
@@ -50,12 +46,8 @@ jobs:
       - name: Setup application key
         run: php artisan key:generate
       - name: Fix permissions for dirs
-        run: chmod -R 777 storage bootstrap/cache
-      - name: Check PHP Version
-        run: php -v
-      - name: Show Laravel versions
-        run: php artisan --version
-      - name: Run database migrations and tests on PHP ${{ matrix.php-versions }}"
+        run: chmod -R 775 storage bootstrap/cache
+      - name: Run migrations, seed and tests on PHP ${{ matrix.php-versions }}
         env:
           DB_CONNECTION: mysql
           DB_DATABASE: iproc
@@ -74,10 +66,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Execute Code Sniffer via phpcs
         run: |
-          composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
-          php artisan key:generate
-          chmod -R 777 storage bootstrap/cache
           composer require --dev squizlabs/php_codesniffer
           vendor/bin/phpcs --exclude=Generic.Files.LineLength app
 

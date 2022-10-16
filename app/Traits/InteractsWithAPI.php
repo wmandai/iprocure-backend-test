@@ -8,6 +8,7 @@ trait InteractsWithAPI
     {
         return response()->json(array_merge($params, ['success' => true]), $code);
     }
+
     protected function failed($params, $code = 400)
     {
         return response()->json(array_merge($params, ['success' => false]), $code);

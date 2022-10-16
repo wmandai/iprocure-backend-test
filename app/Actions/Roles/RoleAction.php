@@ -15,6 +15,7 @@ class RoleAction
             }
         );
     }
+
     public function update(Role $role, array $validatedData)
     {
         return DB::transaction(

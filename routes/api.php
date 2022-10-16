@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => 'v1',
-    'as' => 'api.'
+    'as' => 'api.',
 ], function () {
     // Authentication endpoints
     Route::post('auth/login', [AuthApiController::class, 'login']);

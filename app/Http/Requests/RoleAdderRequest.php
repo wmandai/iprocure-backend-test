@@ -25,7 +25,7 @@ class RoleAdderRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'guard_name' => 'required|string'
+            'guard_name' => 'required|string',
         ];
     }
 }

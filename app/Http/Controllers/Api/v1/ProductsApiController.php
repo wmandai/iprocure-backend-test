@@ -41,6 +41,7 @@ class ProductsApiController extends Controller
         if (auth()->user()->can('view', $product)) {
             return new ProductResource($product);
         }
+
         return $this->unauthorized();
     }
 
@@ -71,6 +72,7 @@ class ProductsApiController extends Controller
                     ->paginate(25)
             );
         }
+
         return $this->unauthorized();
     }
 
@@ -81,15 +83,18 @@ class ProductsApiController extends Controller
             $validatedData = $request->validated();
             try {
                 $product = (new ProductAction())->save($validatedData);
+
                 return $this->success([
-                    'message' => 'Product ' . $request->name . ' created successfully',
-                    'id' => $product->id
+                    'message' => 'Product '.$request->name.' created successfully',
+                    'id' => $product->id,
                 ], 201);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+
                 return $this->failed(['error' => 'Failed, contact sys admin']);
             }
         }
+
         return $this->unauthorized();
     }
 
@@ -106,15 +111,18 @@ class ProductsApiController extends Controller
         if ($request->user()->can('update', $product)) {
             try {
                 (new ProductAction())->update($product, $request->validated());
+
                 return $this->success([
-                    'message' => 'Product ' . $product->name . ' updated successfully',
-                    'id' => $product->id
+                    'message' => 'Product '.$product->name.' updated successfully',
+                    'id' => $product->id,
                 ]);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+
                 return $this->failed(['error' => 'Failed to update product']);
             }
         }
+
         return $this->unauthorized();
     }
 
@@ -130,12 +138,15 @@ class ProductsApiController extends Controller
         if ($request->user()->can('delete', $product)) {
             try {
                 (new ProductAction())->delete($product);
-                return $this->success(['message' => 'Product ' . $product->name . ' deleted successfully']);
+
+                return $this->success(['message' => 'Product '.$product->name.' deleted successfully']);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+
                 return $this->failed(['error' => 'Could not delete product.']);
             }
         }
+
         return $this->unauthorized();
     }
 }

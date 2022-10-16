@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use App\Models\Permission;
 use App\Models\Role;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RoleTableSeeder extends Seeder
 {
@@ -30,7 +30,7 @@ class RoleTableSeeder extends Seeder
         return [
             'products_search',
             'products_access',
-            'products_create'
+            'products_create',
         ];
     }
 
@@ -48,7 +48,7 @@ class RoleTableSeeder extends Seeder
                 'guard_name' => 'api',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
         ];
     }
 }

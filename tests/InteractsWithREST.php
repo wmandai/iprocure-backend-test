@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Auth;
 trait InteractsWithREST
 {
     protected $headers = [];
+
     protected $scopes = [];
+
     protected $user;
 
     public function createUserWithToken($role = 'Admin')
@@ -17,8 +19,9 @@ trait InteractsWithREST
         $this->user->syncRoles($role);
         $token = Auth::login($this->user);
         $this->headers['Accept'] = 'application/json';
-        $this->headers['Authorization'] = 'Bearer ' . $token;
+        $this->headers['Authorization'] = 'Bearer '.$token;
     }
+
     public function getJson($uri, array $headers = [])
     {
         return parent::getJson($this->addBaseUrl($uri), array_merge($this->headers, $headers));
@@ -41,6 +44,6 @@ trait InteractsWithREST
 
     protected function addBaseUrl($uri)
     {
-        return config('app.url') . $uri;
+        return config('app.url').$uri;
     }
 }
