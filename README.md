@@ -16,14 +16,17 @@
 
 - ```git clone https://github.com/wmandai/iprocure-backend-test.git iprocure-backend```  
 
-Install composer dependencies ```composer install```
+- Install composer dependencies ```composer install```
 
-Run database migrations ```php artisan migrate:fresh --seed``` and login using **admin@example.com** and password **admin**
+- Run database migrations ```php artisan migrate:fresh --seed``` and login using **admin@example.com** and password **admin**
 
-Run ```php artisan serve``` to start
+- Run ```php artisan serve``` to start
 
 ## Running tests
-Run ```vendor/bin/pest```
+- Run ```php artisan config:cache --env=testing```
+- ```php artisan migrate:fresh --seed```
+- ```vendor/bin/pest```
+- To change back to local .env run ```php artisan config:cache --env=local```
 
 ## REST API Endpoints
 - **POST** api/v1/auth/login - Login a user
