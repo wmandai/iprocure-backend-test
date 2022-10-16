@@ -64,9 +64,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Execute Code Sniffer via phpcs
+      - name: Check code formatting using pint
         run: |
-          vendor/bin/pint --test
+          ./vendor/bin/pint --test
 
   deploy-production:
     name: deploy-to-production 🚀
