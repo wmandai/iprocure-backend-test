@@ -52,6 +52,12 @@ Run ```vendor/bin/pest```
 - **PUT**       api/v1/users/update/{id} - Make changes to user
 - **GET|HEAD**  api/v1/users/view/{id}  - View user details
 
+## Customer permissions
+- Search products by name or price
+- View products
+- Create a new product
+- View own products
+
 ## Security Vulnerabilities
 
 If you discover a security vulnerability, please DM on twitter [@wmandai](https://twitter.com/wmandai). All security vulnerabilities will be promptly addressed.
