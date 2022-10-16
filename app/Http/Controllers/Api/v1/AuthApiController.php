@@ -29,7 +29,7 @@ class AuthApiController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
+            return response()->json(['status' => 'error', 'message' => 'Failed to authenticate, please check your credentials'], 401);
         }
 
         return $this->respondWithToken($token);
