@@ -13,6 +13,7 @@ class UserAction
             function () use ($validatedData) {
                 $user = User::create($validatedData);
                 $user->syncRoles(config('system.default_role'));
+
                 return $user;
             }
         );

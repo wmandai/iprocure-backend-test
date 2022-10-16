@@ -29,6 +29,7 @@ class UsersApiController extends Controller
                 User::orderByDesc('id')->paginate(25)
             );
         }
+
         return $this->unauthorized();
     }
 
@@ -44,6 +45,7 @@ class UsersApiController extends Controller
         if (auth()->user()->can('view', $user)) {
             return new UserResource($user);
         }
+
         return $this->unauthorized();
     }
 
@@ -54,15 +56,18 @@ class UsersApiController extends Controller
             $validatedData = $request->validated();
             try {
                 $user = (new UserAction())->save($validatedData);
+
                 return $this->success([
-                    'message' => 'User ' . $request->firstName . ' created successfully',
+                    'message' => 'User '.$request->firstName.' created successfully',
                     'id' => $user->id,
                 ], 201);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+
                 return $this->failed(['error' => 'Failed to create system user. Contact sys admin']);
             }
         }
+
         return $this->unauthorized();
     }
 
@@ -79,15 +84,18 @@ class UsersApiController extends Controller
         if ($request->user()->can('update', $user)) {
             try {
                 (new UserAction())->update($user, $request->validated());
+
                 return $this->success([
-                    'message' => 'User ' . $user->firstName . ' updated successfully',
+                    'message' => 'User '.$user->firstName.' updated successfully',
                     'id' => $user->id,
                 ]);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+
                 return $this->failed(['error' => 'Failed to update user']);
             }
         }
+
         return $this->unauthorized();
     }
 
@@ -103,12 +111,15 @@ class UsersApiController extends Controller
         if ($request->user()->can('delete', $user)) {
             try {
                 (new UserAction())->delete($user);
-                return $this->success(['message' => 'User ' . $user->firstName . ' deleted successfully']);
+
+                return $this->success(['message' => 'User '.$user->firstName.' deleted successfully']);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+
                 return $this->failed(['error' => 'Could not delete user.']);
             }
         }
+
         return $this->unauthorized();
     }
 }

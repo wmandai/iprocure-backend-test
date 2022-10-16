@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\v1;
 use App\Actions\Users\UserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAdderRequest;
-use App\Models\User;
 use App\Traits\InteractsWithAPI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +30,7 @@ class AuthApiController extends Controller
         ]);
         $credentials = $this->request->only('email', 'password');
         $credentials = request(['email', 'password']);
-        if (!$token = auth()->attempt($credentials)) {
+        if (! $token = auth()->attempt($credentials)) {
             return $this->failed(['error' => 'Failed to authenticate, check credentials']);
         }
 
@@ -45,6 +44,7 @@ class AuthApiController extends Controller
         try {
             $user = (new UserAction())->save($validatedData);
             $token = Auth::login($user);
+
             return $this->success([
                 'message' => 'User created successfully',
                 'authorization' => [
@@ -61,13 +61,15 @@ class AuthApiController extends Controller
     {
         try {
             Auth::logout();
+
             return $this->success([
-                'message' => 'Successfully logged out'
+                'message' => 'Successfully logged out',
             ]);
         } catch (\Exception $e) {
             return $this->failed(['error' => 'Failed to logout']);
         }
     }
+
     public function refresh()
     {
         return $this->success([
@@ -78,6 +80,7 @@ class AuthApiController extends Controller
             ],
         ]);
     }
+
     /**
      * Get the token array structure.
      *

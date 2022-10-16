@@ -29,6 +29,7 @@ class ProductsApiController extends Controller
                 Product::orderByDesc('id')->paginate(25)
             );
         }
+
         return $this->unauthorized();
     }
 
@@ -86,8 +87,9 @@ class ProductsApiController extends Controller
             $validatedData = $request->validated();
             try {
                 $product = (new ProductAction())->save($validatedData);
+
                 return $this->success([
-                    'message' => 'Product ' . $request->name . ' created successfully',
+                    'message' => 'Product '.$request->name.' created successfully',
                     'id' => $product->id,
                 ], 201);
             } catch (\Exception $e) {
@@ -113,8 +115,9 @@ class ProductsApiController extends Controller
         if ($request->user()->can('update', $product)) {
             try {
                 (new ProductAction())->update($product, $request->validated());
+
                 return $this->success([
-                    'message' => 'Product ' . $product->name . ' updated successfully',
+                    'message' => 'Product '.$product->name.' updated successfully',
                     'id' => $product->id,
                 ]);
             } catch (\Exception $e) {
@@ -140,7 +143,7 @@ class ProductsApiController extends Controller
             try {
                 (new ProductAction())->delete($product);
 
-                return $this->success(['message' => 'Product ' . $product->name . ' deleted successfully']);
+                return $this->success(['message' => 'Product '.$product->name.' deleted successfully']);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
 

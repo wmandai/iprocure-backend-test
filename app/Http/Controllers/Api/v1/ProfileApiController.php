@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
 use App\Traits\InteractsWithAPI;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileApiController extends Controller
 {
@@ -15,14 +13,15 @@ class ProfileApiController extends Controller
     public function profile(Request $request)
     {
         $user = auth()->user();
+
         return $this->success([
             'user' => [
                 'first_name' => $user->firstName,
                 'last_name' => $user->lastName,
                 'email' => $user->email,
                 'phone' => $user->phoneNumber,
-                'created_at' => $user->created_at->toIso8601String()
-            ]
+                'created_at' => $user->created_at->toIso8601String(),
+            ],
         ]);
     }
 }
