@@ -30,7 +30,7 @@ class AuthApiController extends Controller
         ]);
         $credentials = $this->request->only('email', 'password');
         $credentials = request(['email', 'password']);
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return $this->failed(['error' => 'Failed to authenticate, check credentials']);
         }
 
@@ -51,7 +51,7 @@ class AuthApiController extends Controller
                     'token' => $token,
                     'type' => 'bearer',
                 ],
-            ]);
+            ], 201);
         } catch (\Exception $e) {
             return $this->failed(['error' => 'Failed to register user']);
         }

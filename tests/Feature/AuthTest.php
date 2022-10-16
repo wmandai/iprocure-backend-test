@@ -21,7 +21,7 @@ class AuthTest extends TestCase
         $this->postJson('/api/v1/auth/login', [
             'email' => 'johndoe@test.com',
             'password' => 'avengers',
-        ])->assertStatus(401);
+        ])->assertStatus(400);
     }
 
     public function test_can_register_and_login()
