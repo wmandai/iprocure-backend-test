@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductAction
 {
+    // save product to DB
     public function save(array $validatedData)
     {
         return DB::transaction(
@@ -18,6 +19,7 @@ class ProductAction
         );
     }
 
+    // update product
     public function update(Product $product, array $validatedData)
     {
         return DB::transaction(
@@ -27,6 +29,7 @@ class ProductAction
         );
     }
 
+    // delete a product
     public function delete(Product $product)
     {
         return DB::transaction(

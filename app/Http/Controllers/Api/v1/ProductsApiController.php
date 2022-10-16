@@ -34,7 +34,7 @@ class ProductsApiController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -80,6 +80,7 @@ class ProductsApiController extends Controller
         return $this->unauthorized();
     }
 
+    // create a new product
     public function create(ProductAdderRequest $request)
     {
         if ($request->user()->can('create', Product::class)) {

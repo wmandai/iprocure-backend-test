@@ -63,6 +63,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        // Handle model not found error for APIs
         if ($exception instanceof ModelNotFoundException && $request->wantsJson()) {
             return response()->json([
                 'success' => false,

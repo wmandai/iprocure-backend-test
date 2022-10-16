@@ -49,6 +49,7 @@ class UsersApiController extends Controller
         return $this->unauthorized();
     }
 
+    // create new user
     public function create(UserAdderRequest $request)
     {
         if ($request->user()->can('create', User::class)) {

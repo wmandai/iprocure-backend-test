@@ -30,6 +30,7 @@ class AuthApiController extends Controller
         ]);
         $credentials = $this->request->only('email', 'password');
         $credentials = request(['email', 'password']);
+        // attempt to login and return token on success
         if (! $token = auth()->attempt($credentials)) {
             return $this->failed(['error' => 'Failed to authenticate, check credentials']);
         }
@@ -40,9 +41,11 @@ class AuthApiController extends Controller
     public function register(UserAdderRequest $request)
     {
         $validatedData = $request->validated();
+        // hash password before saving
         $validatedData['password'] = Hash::make($this->request->password);
         try {
             $user = (new UserAction())->save($validatedData);
+            // generate token after registration
             $token = Auth::login($user);
 
             return $this->success([

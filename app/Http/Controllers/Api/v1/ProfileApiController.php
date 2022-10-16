@@ -10,6 +10,7 @@ class ProfileApiController extends Controller
 {
     use InteractsWithAPI;
 
+    // view user profile information
     public function profile(Request $request)
     {
         $user = auth()->user();
