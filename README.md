@@ -1,6 +1,3 @@
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-
 ## About the REPO
 
 1st Level interview task for the position of Backend Developer at iProcure with features:
