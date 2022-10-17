@@ -34,7 +34,7 @@ jobs:
     name: php-${{ matrix.php-versions }} testing on ${{ matrix.operating-system }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install PHP versions
         uses: shivammathur/setup-php@v2
         with:
@@ -63,7 +63,7 @@ jobs:
     name: code-quality-checks 🛡
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Check code formatting using pint
         run: |
           composer require --dev laravel/pint
@@ -76,9 +76,9 @@ jobs:
     # change to main branch to activate it
     if: github.ref == 'refs/heads/master' 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Setup PHP
-        uses: shivammathur/setup-php@master
+        uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
           extensions: mbstring, bcmath
@@ -100,9 +100,9 @@ jobs:
     needs: [code-style]
     if: github.ref == 'refs/heads/develop'
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Setup PHP
-        uses: shivammathur/setup-php@master
+        uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
           extensions: mbstring, bcmath
@@ -124,9 +124,9 @@ jobs:
     needs: [code-style]
     if: github.ref == 'refs/heads/staging'
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Setup PHP
-        uses: shivammathur/setup-php@master
+        uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
           extensions: mbstring, bcmath
