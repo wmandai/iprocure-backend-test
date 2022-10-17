@@ -10,7 +10,7 @@
 - Validations and Tests.
 - PHP Code standards and formatting.
 
-> Since Lumen will be discontinued in future because PHP has made significant improvement in performance and introduction of Larave Octane and Vapor, this application was developed using Laravel Framework.
+> Since Lumen will be discontinued in future because PHP has made significant improvements in performance and introduction of Larave Octane and Vapor, this application was developed using Laravel Framework.
 
 ## Installation
 
@@ -18,9 +18,12 @@
 
 - Install composer dependencies ```composer install```
 
-- Run database migrations ```php artisan migrate:fresh --seed``` and login using **admin@example.com** and password **admin**
+- Run database migrations ```php artisan migrate:fresh --seed``` and login (/api/v1/auth/login) using **admin@example.com** and password **admin** to get the token.
 
 - Run ```php artisan serve``` to start
+
+![RESTAPI endpoints insomnia](/public/img/preview.png "Insomnia")
+
 
 ## Running tests
 - Run ```php artisan config:cache --env=testing```
@@ -33,7 +36,7 @@
 - **POST**  api/v1/auth/logout - Logout user
 - **POST**      api/v1/auth/refresh - refresh JWT Token
 - **POST**      api/v1/auth/register - Register new user
-- **DELETE**    api/v1/products/delete/{id} - Delete products
+- **DELETE**    api/v1/products/delete/{id} - Delete product
 - **GET|HEAD**  api/v1/products/mine - Access my own products
 - **POST**      api/v1/products/new - Create a new product
 - **POST**      api/v1/products/search - Search product using price, name
