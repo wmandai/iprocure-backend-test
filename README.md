@@ -13,22 +13,40 @@
 > Since Lumen will be discontinued in future because PHP has made significant improvements in performance and introduction of Larave Octane and Vapor, this application was developed using Laravel Framework.
 
 ## Installation
+> requires PHP 8.0+
 
-- ```git clone https://github.com/wmandai/iprocure-backend-test.git iprocure-backend```  
+```bash
+git clone https://github.com/wmandai/iprocure-backend-test.git iprocure-backend
+```
+```bash 
+cd iprocure-backend
+```
+Install composer dependencies 
+```bash 
+composer install
+```
+Setup database and run migrations 
+```bash
+cp .env.example .env
+php artisan key:generate
+php artisan migrate:fresh --seed
+```
+Login (/api/v1/auth/login) using **admin@example.com** and password **admin** to get the admin token.
 
-- Install composer dependencies ```composer install```
-
-- Run database migrations ```php artisan migrate:fresh --seed``` and login (/api/v1/auth/login) using **admin@example.com** and password **admin** to get the token.
-
-- Run ```php artisan serve``` to start
+Run it 
+```bash
+php artisan serve
+```
 
 ![RESTAPI endpoints insomnia](/public/img/preview.png "Insomnia")
 
 
 ## Running tests
 - Run ```php artisan config:cache --env=testing```
-- ```php artisan migrate:fresh --seed```
-- ```vendor/bin/pest```
+```bash
+php artisan migrate:fresh --seed
+vendor/bin/pest
+```
 - To change back to local .env run ```php artisan config:cache --env=local```
 
 ## REST API Endpoints

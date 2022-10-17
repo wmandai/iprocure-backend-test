@@ -10,7 +10,7 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view all users.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
@@ -21,7 +21,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can view user.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\User  $model
@@ -33,7 +33,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can create new users.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
@@ -44,7 +44,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can update user.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\User  $model
@@ -56,7 +56,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the user can delete user.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\User  $model
@@ -80,7 +80,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can restore user.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\User  $model
@@ -92,7 +92,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete user.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\User  $model

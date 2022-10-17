@@ -11,7 +11,7 @@ class RolePolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view all roles.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
@@ -22,7 +22,7 @@ class RolePolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can view role.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Role  $role
@@ -34,7 +34,7 @@ class RolePolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can create new role.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
@@ -45,7 +45,7 @@ class RolePolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can update a role.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Role  $role
@@ -57,7 +57,7 @@ class RolePolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the user can delete role.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Role  $role
@@ -69,7 +69,7 @@ class RolePolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can restore role.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Role  $role
@@ -81,7 +81,7 @@ class RolePolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete role.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Role  $role

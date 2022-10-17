@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // One macro to rule them all 😜
         Builder::macro(
             'whereLike',
             function ($attributes, string $searchTerm) {

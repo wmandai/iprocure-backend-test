@@ -11,7 +11,7 @@ class ProductPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view all products.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
@@ -22,7 +22,7 @@ class ProductPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can view product.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Product  $product
@@ -45,7 +45,7 @@ class ProductPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can create new product.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
@@ -56,37 +56,37 @@ class ProductPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can update product.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Product $Product)
+    public function update(User $user, Product $product)
     {
         return $user->hasRole('Admin') || $user->hasPermissionTo('products_update');
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the user can delete product.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Product $Product)
+    public function delete(User $user, Product $product)
     {
         return $user->hasRole('Admin') || $user->hasPermissionTo('products_delete');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can restore product
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Product $Product)
+    public function restore(User $user, Product $product)
     {
         //
     }
@@ -98,7 +98,7 @@ class ProductPolicy
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Product $Product)
+    public function forceDelete(User $user, Product $product)
     {
         //
     }
